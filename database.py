@@ -51,7 +51,7 @@ class databaseall(ABC):
 
 
 
-class Postgres(database):
+class Postgres(databaseall):
 
     def __init__(self):
         self.connection = None
