@@ -6,32 +6,45 @@ class Postgres(ABC):
 
     @abstractmethod
     def connect(self,user, password, host, port, database):
-        self.conn= psycopg2.connect(user = user, password = password, database = database, host = host, port = port)
+        try:
+            self.conn = psycopg2.connect(user = user, password = password, database = database, host = host, port = port)
+            print("Connection established")
+        except:
+            print("Connection not established")
+            self.conn = "Connection not established"
         return self.conn
 
     @abstractmethod
     def session(self):
         autocommit = True
-        pass
+        self.conn.set_session(autocommit=autocommit)
 
     @abstractmethod
     def create_database(self, query):
-        self.cur.execute(query)
-        self.conn.commit()
+        try:
+            self.cur.execute(query)
+            self.conn.commit()
+        except:
+            print("An error occurred while creating the Database")
 
     @abstractmethod
     def status(self):
         pass
 
     @abstractmethod
-    def cursor(self, query):
-        self.cur = self.conn.cursor()
+    def cursor(self):
+        try:
+            if (self.conn):
+                self.cur = self.conn.cursor()
+        except:
+            self.cur= "An error occurred while creating the cursor"
         return self.cur
 
     @abstractmethod
     def select_table(self, query):
         self.cur.execute(query)
-        pass
+        rows= self.cur.fetchall()
+        return rows
 
     @abstractmethod
     def create_table(self, query):
@@ -56,4 +69,8 @@ class Postgres(ABC):
 
     @abstractmethod
     def close(self):
-        self.conn.close()
+        if (self.conn):
+            self.cur.close()
+            self.conn.close()
+        else:
+            print("No existing connection")
