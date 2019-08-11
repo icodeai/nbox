@@ -52,35 +52,50 @@ class Postgres(ABC):
         pass
 
 class PostgresDb(Postcgres):
-    pass
+    
+    def connect_db(self, db_url):
+        """
+        Connect to a postgress database
+        """
+        try:
+            self.conn = psycopg2.connect(db_url)
+            cur = conn.cursor()
+        except Exception as error:
+            print(error)
 
-    def connect_db(Postgres):
-        pass
-
-    def check_session(Postgres):
-        pass
-
-    def createdatabase(Postgres):
-        pass
-
-    def cursor(Postgres):
-        pass
+    def create_database(self, query):
+        """
+        Create a database
+        """
+        self.cur.execute(query)
+        self.conn.commit()
+    
+    def cursor(self, conn):
+        """
+        Create a cursor
+        """
+        self.cur = self.conn.cursor()
 
     def select_table(Postgres):
         pass
 
-    def create_table(Postgres):
-        pass
+    def create_table(self, query):
+        self.cur.execute(query)
+        
 
-    def insert_ows(Postgres):
-        pass
+    def insert_rows(self, query):
+        self.cur.execute(query)
 
     def show_table(Postgres):
-        pass
-
+        """
+        Shows all data in table
+        """
+        
     def drop_table(Postgres):
-        pass
-
+        """
+        Deletes all tables
+        """
+        
     def close_table(Postgres):
         pass
 
