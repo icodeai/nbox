@@ -5,6 +5,55 @@ import psycopg2
 class Postgres(ABC):
 
     @abstractmethod
+    def connect(self, user, password, host, port, database):
+        pass
+
+    @abstractmethod
+    def session(self):
+        autocommit = True
+        pass
+
+    @abstractmethod
+    def create_database(self):
+        pass
+
+    @abstractmethod
+    def status(self):
+        pass
+
+    @abstractmethod
+    def cursor(self, query):
+        pass
+
+    @abstractmethod
+    def select_table(self, query):
+        pass
+
+    @abstractmethod
+    def create_table(self, query):
+        pass
+
+    @abstractmethod
+    def insert_rows(self, query):
+        pass
+
+    @abstractmethod
+    def show_table(self, query):
+        pass
+
+    @abstractmethod
+    def drop_table(self, query):
+        pass
+
+    @abstractmethod
+    def close(self):
+        pass
+
+class DataBase(Postgres):
+
+    def __init__(self):
+        self.conn, self.cur = None
+
     def connect(self,user, password, host, port, database):
         try:
             self.conn = psycopg2.connect(user = user, password = password, database = database, host = host, port = port)
@@ -14,12 +63,10 @@ class Postgres(ABC):
             self.conn = "Connection not established"
         return self.conn
 
-    @abstractmethod
     def session(self):
         autocommit = True
         self.conn.set_session(autocommit=autocommit)
 
-    @abstractmethod
     def create_database(self, query):
         try:
             self.cur.execute(query)
@@ -27,11 +74,9 @@ class Postgres(ABC):
         except:
             print("An error occurred while creating the Database")
 
-    @abstractmethod
     def status(self):
         pass
 
-    @abstractmethod
     def cursor(self):
         try:
             if (self.conn):
@@ -40,34 +85,28 @@ class Postgres(ABC):
             self.cur= "An error occurred while creating the cursor"
         return self.cur
 
-    @abstractmethod
     def select_table(self, query):
         self.cur.execute(query)
         rows= self.cur.fetchall()
         return rows
 
-    @abstractmethod
     def create_table(self, query):
         self.cur.execute(query)
         self.conn.commit()
 
-    @abstractmethod
     def insert_rows(self, query):
         self.cur.execute(query)
         self.conn.commit()
 
-    @abstractmethod
     def show_table(self, query):
         self.cur.execute(query)
         rows= self.cur.fetchall()
         return rows
 
-    @abstractmethod
     def drop_table(self, query):
         self.cur.execute(query)
         self.conn.commit()
 
-    @abstractmethod
     def close(self):
         if (self.conn):
             self.cur.close()
