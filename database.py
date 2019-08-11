@@ -80,9 +80,15 @@ class PostgresDb(Postcgres):
         pass
 
     def create_table(self, query):
-        self.cur.execute(query)
-        
-
+        """
+        Create table
+        """
+        try:
+            self.cur.execute(query)
+            self.cur.close
+            self.conn.commit()
+        except Exception as error:
+            print(error)
     def insert_rows(self, query):
         self.cur.execute(query)
 
