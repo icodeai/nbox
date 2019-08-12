@@ -142,3 +142,4 @@ class Postgres(ABC):
     def close(self):
         self.cursor().close()
         self.connection.close()
+        
