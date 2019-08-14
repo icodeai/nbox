@@ -2,6 +2,9 @@ from database import Postgres
 import psycopg2
 from config import config
 
+class ConnectToDb():
+    pass
+
 class PostgresDb(Postgres):
     """
     COnnect to the postgresql database
@@ -29,8 +32,13 @@ class PostgresDb(Postgres):
         finally:
             if conn is not None:
                 conn.close()
-                print('Database connection close')
+                print('Database connection closed')
+                
+    
 
+            
+        
 if __name__ == '__main__':
     a = PostgresDb
     a.connect()
+    a.create_table()
