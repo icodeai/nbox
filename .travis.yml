@@ -13,7 +13,8 @@ before_script:
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_nbox to antoo;" -U postgres
   
 script: 
-  - pytest --cov-report term-missing --cov=db_config
+  - "python -m pytest tests/"
+  - "python -m pytest --cov tests/"
   
 after_success:
   - coveralls
