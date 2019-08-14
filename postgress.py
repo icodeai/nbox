@@ -35,6 +35,27 @@ class PostgresDb(Postgres):
                 print('Database connection closed')
                 
     
+    def create_table(query):
+        """
+        Function to create a table in an already existing database
+        """
+        conn = None
+        try:
+            params = config()
+            print('Connecting to database...')
+            conn = psycopg2.connect(**params)
+            print('Connection to database succesful')
+            cur = conn.cursor()
+            cur.execute(query)
+            print('Table created succesfully')
+            conn.commit()
+            conn.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        finally:
+            if conn is not None:
+                conn.close()
+                print('Connection closed')
 
             
         
