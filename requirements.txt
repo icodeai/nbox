@@ -12,7 +12,6 @@ lazy-object-proxy==1.4.1
 mccabe==0.6.1
 more-itertools==7.2.0
 packaging==19.1
-pkg-resources==0.0.0
 pluggy==0.12.0
 psycopg2==2.8.3
 pudb==2019.1
