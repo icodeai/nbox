@@ -1,0 +1,4 @@
+env
+db.ini
+.vscode
+__pycache__
