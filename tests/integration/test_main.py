@@ -22,6 +22,12 @@ class TestPostgres(unittest.TestCase):
         """
         self.assertEqual('success', a.cursor())
   
-    
+    def test_select_table(self):
+        """
+        Test fetch and display of records
+        """
+        b = "SELECT id, name, address, salary from COMPANY"
+        self.assertEqual('success', a.select_table(b))
+        
 if __name__ == '__main__':
     unittest.main()
