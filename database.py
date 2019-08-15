@@ -3,51 +3,52 @@ import psycopg2
 from psycopg2 import Error
 
 
+
 class Postgres(ABC):
 
     @abstractmethod
-    def connect(user, password, host, port, database):
+    def connect(self,database_url):
         pass
 
-    @abstractmethod
-    def session():
+    # @abstractmethod
+    def session(self,):
         autocommit = True
         pass
 
-    @abstractmethod
-    def create_database():
+    # @abstractmethod
+    def create_database(self):
+        pass
+
+    # @abstractmethod
+    def status(self):
         pass
 
     @abstractmethod
-    def status():
+    def cursor(self):
         pass
 
-    @abstractmethod
-    def cursor(query):
+    # @abstractmethod
+    def select_table(self,query):
         pass
 
-    @abstractmethod
-    def select_table(query):
+    # @abstractmethod
+    def create_table(self,query):
         pass
 
-    @abstractmethod
-    def create_table(query):
+    # @abstractmethod
+    def insert_rows(self,query):
         pass
 
-    @abstractmethod
-    def insert_rows(query):
+    # @abstractmethod
+    def show_table(self,query):
         pass
 
-    @abstractmethod
-    def show_table(query):
+    # @abstractmethod
+    def drop_table(self,query):
         pass
 
-    @abstractmethod
-    def drop_table(query):
-        pass
-
-    @abstractmethod
-    def close():
+    # @abstractmethod
+    def close(self):
         pass
     
     class Database(Postgres):
