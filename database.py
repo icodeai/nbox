@@ -3,18 +3,19 @@ import psycopg2
 from psycopg2 import Error
 
 
-class Postgres(ABC):
 
-    @abstractmethod
-    def connect(user, password, host, port, database):
+class Postgres(ABC):
+  
+    def connect(self,database_url):
         pass
 
     # @abstractmethod
-    def session():
+    def session(self,):
         autocommit = True
         pass
 
     # @abstractmethod
+
     def create_database():
         pass
 
@@ -49,3 +50,4 @@ class Postgres(ABC):
     # @abstractmethod
     def close():
         pass
+
