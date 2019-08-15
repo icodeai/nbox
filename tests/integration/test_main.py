@@ -16,7 +16,11 @@ class TestPostgres(unittest.TestCase):
         """
         self.assertEqual('success', a.connect())
         
-    
+    def test_cursor(self):
+        """
+        Test cursor function
+        """
+        self.assertEqual('success', a.cursor())
   
     
 if __name__ == '__main__':
