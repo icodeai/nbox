@@ -13,9 +13,6 @@ class PostgresTestCase(TestCase):
     def setUp(self):
         self.postgres = PostgresConfig()
        
-    def test_make_bad_connection(self):
-        self.assertEqual(self.postgres.connect(WRONG_TEST_DATABASE_URL),
-                         'failed to connect to database.')
     
     def test_make_good_connection(self):
         print(TEST_DATABASE_URL)
