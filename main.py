@@ -48,11 +48,23 @@ class PostgresDb(Postgres):
         """
         params = config()
         conn = psycopg2.connect(**params)
-        cursor = conn.cursor()
+        cur = conn.cursor()
         return 'success'
     
     def select_table(query):
-        pass
+        """
+        Fetch and display records from database
+        
+        Arguments:
+            query {[type]} -- [description]
+        """
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(query)
+        rows = cur.fetchall()
+        conn.close()
+        return 'success'
     
     def create_table(query):
         """
@@ -87,4 +99,5 @@ class PostgresDb(Postgres):
 if __name__ == '__main__':
     a = PostgresDb
     a.connect()
+    a.select_table("SELECT id, name, address, salary from COMPANY")
     
