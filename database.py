@@ -21,9 +21,9 @@ class Postgres(ABC):
     # def status():
     #     pass
 
-    # @abstractmethod
-    # def cursor(query):
-    #     pass
+    @abstractmethod
+    def cursor(self):
+        pass
 
     # @abstractmethod
     # def select_table(query):

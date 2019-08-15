@@ -1,0 +1,2 @@
+pygments>=1.0
+urwid>=1.1.1
