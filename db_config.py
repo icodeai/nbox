@@ -47,5 +47,3 @@ class Databaseconfig(Postgres):
         cursor = connection.cursor()
         return cursor
 
-
-        

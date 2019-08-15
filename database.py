@@ -1,6 +1,6 @@
-from abc import (ABC, abstractmethod)
+
+from abc import ABC, abstractmethod
 import psycopg2
-from psycopg2 import Error
 
 
 class Postgres(ABC):
@@ -10,42 +10,43 @@ class Postgres(ABC):
         pass
 
     # @abstractmethod
-    def session():
+    def session(self,):
+
         autocommit = True
         pass
 
     # @abstractmethod
-    def create_database():
+    def create_database(self):
         pass
 
     # @abstractmethod
-    def status():
-        pass
-
-    # @abstractmethod
-    def cursor(query):
-        pass
-
-    # @abstractmethod
-    def select_table(query):
-        pass
-
-    # @abstractmethod
-    def create_table(query):
+    def status(self):
         pass
 
     @abstractmethod
-    def insert_rows(query):
-        pass
-
-    @abstractmethod
-    def show_table(query):
+    def cursor(self):
         pass
 
     # @abstractmethod
-    def drop_table(query):
+    def select_table(self,query):
         pass
 
     # @abstractmethod
-    def close():
+    def create_table(self,query):
+        pass
+
+    # @abstractmethod
+    def insert_rows(self,query):
+        pass
+
+    # @abstractmethod
+    def show_table(self,query):
+        pass
+
+    # @abstractmethod
+    def drop_table(self,query):
+        pass
+
+    # @abstractmethod
+    def close(self):
         pass
