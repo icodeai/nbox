@@ -21,18 +21,12 @@ class PostgresDb(Postgres):
             params = config()
             conn = psycopg2.connect(**params)
             cur = conn.cursor()
-            #return 'Version'
-            #print('Postgresql database version: ')
-            cur.execute('SELECT Version()')
-            db_version = cur.fetchone()
-            print(db_version)
             cur.close
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
         finally:
             if conn is not None:
                 conn.close()
-            #    print('Database connection closed')
         return 'success'        
     
     def session():
