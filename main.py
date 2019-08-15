@@ -38,9 +38,19 @@ class PostgresDb(Postgres):
     def status():
         pass
     
-    def cursor(query):
-        pass
-
+    def cursor():
+        """
+        Create a cursor area in memory where SQL statement
+        are executed
+        
+        Arguments:
+            query {[type]} -- [description]
+        """
+        params = config()
+        conn = psycopg2.connect(**params)
+        cursor = conn.cursor()
+        return 'success'
+    
     def select_table(query):
         pass
     
