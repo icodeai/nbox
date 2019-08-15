@@ -15,12 +15,7 @@ class TestPostgres(unittest.TestCase):
         Test that the database connection is succesful
         """
         self.assertEqual('success', a.connect())
-        #self.assertEqual('Version', a.connect())
-        #self.assertEqual(None, a.connect())
-    
-    
-    
-    
+  
     
 if __name__ == '__main__':
     unittest.main()
