@@ -37,7 +37,7 @@ class test(Postgres):
 
     """    
         try:
-           # pass
+           pass
         except (Exception, psycopg2.Error) as error :
             pass
     def create_database():
