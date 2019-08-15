@@ -19,10 +19,10 @@ class PostgresDb(Postgres):
         conn = None
         try:
             params = config()
-            print('Connecting to Posgress..../')
             conn = psycopg2.connect(**params)
             cur = conn.cursor()
-            print('Postgresql database version: ')
+            #return 'Version'
+            #print('Postgresql database version: ')
             cur.execute('SELECT Version()')
             db_version = cur.fetchone()
             print(db_version)
@@ -32,12 +32,55 @@ class PostgresDb(Postgres):
         finally:
             if conn is not None:
                 conn.close()
-                print('Database connection closed')
-                
+            #    print('Database connection closed')
+        return 'success'        
     
+    def session():
+        pass
+    
+    def create_database():
+        pass
+    
+    def status():
+        pass
+    
+    def cursor(query):
+        pass
 
-            
+    def select_table(query):
+        pass
+    
+    def create_table(query):
+        """
+        Create table in a database
+        
+        Arguments:pi
+            query {[type]} -- [description]
+        
+        Returns:
+            [type] -- [description]
+        """
+        
+    
+    def insert_rows(query):
+        """
+        Funtion to insert records intp a database
+        
+        Arguments:
+            query {[type]} -- [description]
+        """
+        pass
+    
+    def show_table(query):
+        pass
+    
+    def drop_table(query):
+        pass
+    
+    def close():
+        pass        
         
 if __name__ == '__main__':
     a = PostgresDb
     a.connect()
+    
