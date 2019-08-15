@@ -18,3 +18,12 @@ class PostgresTestCase(TestCase):
         print(TEST_DATABASE_URL)
         self.assertNotEqual(self.postgres.connect(TEST_DATABASE_URL),
                             'failed to connect to database.')
+
+    def test_close(self):
+        connection = self.postgres.connect(TEST_DATABASE_URL)
+        self.assertEqual(self.postgres.close(connection),"Close connection successful")
+
+    def test_close_failure(self):
+        connection = self.postgres.connect(WRONG_TEST_DATABASE_URL)
+        self.assertEqual(self.postgres.close(connection),"Close connection failed")
+
