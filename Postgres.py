@@ -1,6 +1,8 @@
-
+import os 
 import psycopg2
 from database import Postgres
+
+dbParameters = os.getenv('dbParameters')
 
 class Postgresdb(Postgres):
 
@@ -9,19 +11,15 @@ class Postgresdb(Postgres):
         self.connection = None
         self.cursordb = None
 
-    def connect(self, user, password, host, port, database):
+    def connect(self, dbParameters):
         '''connects to Postgresdb
         Args:
-            user
-            password
-            host
-            port
-            database
-        returns:
-            the connection parameters if the connection is successful
+            dbParameters(str): parameters required to connect to the db
+        Returns:
+            the connection parameters if the connection is successful   
         '''
         try:
-            self.connection = psycopg2.connect(user, password, host, port,database)
+            self.connection = psycopg2.connect(dbParameters)
             self.cursordb = self.connection.cursor()
             return self.connection.get_dsn_parameters()
 
@@ -30,4 +28,4 @@ class Postgresdb(Postgres):
 
 if __name__ == "__main__":
     db = Postgresdb()
-    print(db.connect())
+    print(db.connect(dbParameters))
