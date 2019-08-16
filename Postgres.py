@@ -23,7 +23,7 @@ class Postgresdb(Postgres):
             self.connection = psycopg2.connect(user, password, host, port,database)
             self.cursordb = self.connection.cursor()
 
-            return self.connection.get_dsn_parameters(),"\n")
+            return self.connection.get_dsn_parameters()
 
         except (Exception, psycopg2.Error) as error :    
             print ("Error while connecting to PostgreSQL", error)
