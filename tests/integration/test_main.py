@@ -45,8 +45,14 @@ class TestPostgres(unittest.TestCase):
         Test for inserting rows
         """
         b = ("UPDATE COMPANY set SALARY = 25000.00 where ID=1")
-        self.assertEqal('success', a.insert_rows(b))
+        self.assertEqual('success', a.insert_rows(b))
         
+    def test_show_table(self):
+        """
+        Test function to show table
+        """
+        b = ("SELECT id, name, address, salary from COMPANY")
+        self.assertEqual('success', a.show_table(b))
 
 if __name__ == '__main__':
     unittest.main()
