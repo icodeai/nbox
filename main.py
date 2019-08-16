@@ -68,7 +68,7 @@ class PostgresDb(Postgres):
     
     def create_table(query):
         """
-        Create table in a database
+        Create a table in a database
         
         Arguments:pi
             query {[type]} -- [description]
@@ -76,7 +76,13 @@ class PostgresDb(Postgres):
         Returns:
             [type] -- [description]
         """
-        
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(query)
+        conn.commit()
+        conn.close()
+        return 'success'        
     
     def insert_rows(query):
         """
@@ -100,4 +106,16 @@ if __name__ == '__main__':
     a = PostgresDb
     a.connect()
     a.select_table("SELECT id, name, address, salary from COMPANY")
-    
+    a.create_table('''CREATE TABLE SUPPLIES
+(ID INT PRIMARY KEY
+NOT NULL,
+NAME
+TEXT
+NOT NULL,
+AGE
+INT
+NOT NULL,
+ADDRESS
+CHAR(50),
+SALARY
+REAL);''')
