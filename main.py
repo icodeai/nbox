@@ -93,14 +93,24 @@ class PostgresDb(Postgres):
         """
         params = config()
         conn = psycopg2.connect(**params)
-        cur = conn.cursor
+        cur = conn.cursor()
         cur.execute(query)
         conn.commit()
         return 'success'
         
-    
     def show_table(query):
-        pass
+        """
+        Function fetches and displays records ni the table
+        
+        Arguments:
+            query {[SQL statement]} -- [description]
+        """
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute(query)
+        rows = cur.fetchall()
+        return 'success'
     
     def drop_table(query):
         pass
@@ -118,3 +128,4 @@ if __name__ == '__main__':
             ADDRESS CHAR(50),
             SALARY  REAL);''')
     a.insert_rows("UPDATE COMPANY set SALARY = 25000.00 where ID=1")
+    a.show_table("SELECT id, name, address, salary from COMPANY")
