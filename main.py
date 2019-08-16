@@ -86,12 +86,12 @@ class PostgresDb(Postgres):
     
     def insert_rows(query):
         """
-        Funtion to insert records intp a database
+        Funtion to insert records into a database
         
         Arguments:
             query {[type]} -- [description]
         """
-        pass
+        
     
     def show_table(query):
         pass
@@ -106,16 +106,8 @@ if __name__ == '__main__':
     a = PostgresDb
     a.connect()
     a.select_table("SELECT id, name, address, salary from COMPANY")
-    a.create_table('''CREATE TABLE SUPPLIES
-(ID INT PRIMARY KEY
-NOT NULL,
-NAME
-TEXT
-NOT NULL,
-AGE
-INT
-NOT NULL,
-ADDRESS
-CHAR(50),
-SALARY
-REAL);''')
+    a.create_table('''CREATE TABLE TEST (ID INT PRIMARY KEY NOT NULL,
+            NAME    TEXT    NOT NULL,
+            AGE     INT     NOT NULL,
+            ADDRESS CHAR(50),
+            SALARY  REAL);''')
