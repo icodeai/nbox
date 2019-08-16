@@ -25,5 +25,5 @@ class PostgresTestCase(TestCase):
         self.assertEqual(self.postgres.close(connection),"Close connection successful")
 
     def test_close_connection_failure(self):
-        connection = self.postgres.connect(WRONG_TEST_DATBASE_URL)
+        connection = self.postgres.connect(WRONG_TEST_DATABASE_URL)
         self.assertEqual(self.postgres.close(connection),"Close connection failed")
