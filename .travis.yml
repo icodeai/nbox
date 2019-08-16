@@ -1,18 +1,18 @@
+
 language: python
 python:
-  - '3.7.3'
+  - "3.7"
   - "nightly"
-install: 
-  - pip install -r requirements.txt
-  - pip install coveralls
-services:
-  - postgresql
 
-script: 
+install:
+  - "pip install pytest"
+  - "pip install pytest-cov"
+  - "pip install coveralls"
+  - "pip install -r requirements.txt"
+
+script:
   - "python -m pytest tests/"
   - "python -m pytest --cov tests/"
-  
+
 after_success:
   - coveralls
-  
-cache: pip
