@@ -86,11 +86,17 @@ class PostgresDb(Postgres):
     
     def insert_rows(query):
         """
-        Funtion to insert records into a database
+        Funtion to insert and update records into a table
         
         Arguments:
             query {[type]} -- [description]
         """
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor
+        cur.execute(query)
+        conn.commit()
+        return 'success'
         
     
     def show_table(query):
@@ -111,3 +117,4 @@ if __name__ == '__main__':
             AGE     INT     NOT NULL,
             ADDRESS CHAR(50),
             SALARY  REAL);''')
+    a.insert_rows("UPDATE COMPANY set SALARY = 25000.00 where ID=1")
