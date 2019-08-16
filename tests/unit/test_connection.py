@@ -1,14 +1,12 @@
 import os
 from unittest import TestCase
-
 from Postgres import Postgresdb
-
 
 TEST_DATABASE_URL       = os.getenv('TEST_DATABASE_URL')
 WRONG_TEST_DATABASE_URL = os.getenv('WRONG_TEST_DATABASE_URL')
 
 
-class PostgresTestCase(TestCase):
+class PostgresTes(TestCase):
     
     def setUp(self):
         self.postgres = PostgresConfig()
