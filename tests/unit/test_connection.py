@@ -1,18 +1,15 @@
 import os
-from unittest import TestCase
+import unittest
 from Postgres import Postgresdb
 
-TEST_DATABASE_URL       = os.getenv('TEST_DATABASE_URL')
-WRONG_TEST_DATABASE_URL = os.getenv('WRONG_TEST_DATABASE_URL')
+dbParameters = os.getenv('dbParameters')
 
+class TestCnnctn(unittest.TestCase):
 
-class PostgresTes(TestCase):
-    
-    def setUp(self):
-        self.postgres = PostgresConfig()
-       
-    
-    def test_make_good_connection(self):
-        print(TEST_DATABASE_URL)
-        self.assertNotEqual(self.postgres.connect(TEST_DATABASE_URL),
-                            'failed to connect to database.')
+    def test_connection(self):
+        db = Postgresdb()
+        self.assertEqual(db.connect(dbParameters),
+                            'connection successful')
+
+if __name__ == "__main__":
+    unittest.main()
