@@ -1,7 +1,7 @@
 import os 
 import psycopg2
 from database import Postgres
-
+#env variable stored in local machine
 dbParameters = os.getenv('dbParameters')
 
 class Postgresdb(Postgres):
@@ -16,7 +16,9 @@ class Postgresdb(Postgres):
         Args:
             dbParameters(str): parameters required to connect to the db
         Returns:
-            the connection parameters if the connection is successful   
+            the connection parameters if the connection is successful  
+
+            error if unsuccessful 
         '''
         try:
             self.connection = psycopg2.connect(dbParameters)
@@ -24,7 +26,7 @@ class Postgresdb(Postgres):
             return self.connection.get_dsn_parameters()
 
         except (Exception, psycopg2.Error) as error :    
-            print ("Error while connecting to PostgreSQL", error)
+            return error
 
 if __name__ == "__main__":
     db = Postgresdb()
