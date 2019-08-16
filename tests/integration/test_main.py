@@ -29,5 +29,16 @@ class TestPostgres(unittest.TestCase):
         b = "SELECT id, name, address, salary from COMPANY"
         self.assertEqual('success', a.select_table(b))
         
+    def test_create_table(self):
+        """
+        Test function to create a table
+        """
+        b = ('''CREATE TABLE TEST (ID INT PRIMARY KEY NOT NULL,
+            NAME    TEXT    NOT NULL,
+            AGE     INT     NOT NULL,
+            ADDRESS CHAR(50),
+            SALARY  REAL);''')
+        self.assertEqual('success', a.create_table(b))
+        
 if __name__ == '__main__':
     unittest.main()
