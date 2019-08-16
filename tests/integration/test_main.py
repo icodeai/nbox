@@ -33,7 +33,7 @@ class TestPostgres(unittest.TestCase):
         """
         Test function to create a table
         """
-        b = ('''CREATE TABLE TEST (ID INT PRIMARY KEY NOT NULL,
+        b = ('''CREATE TABLE TEST2 (ID INT PRIMARY KEY NOT NULL,
             NAME    TEXT    NOT NULL,
             AGE     INT     NOT NULL,
             ADDRESS CHAR(50),

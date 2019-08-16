@@ -122,7 +122,7 @@ if __name__ == '__main__':
     a = PostgresDb
     a.connect()
     a.select_table("SELECT id, name, address, salary from COMPANY")
-    a.create_table('''CREATE TABLE TEST (ID INT PRIMARY KEY NOT NULL,
+    a.create_table('''CREATE TABLE TEST1 (ID INT PRIMARY KEY NOT NULL,
             NAME    TEXT    NOT NULL,
             AGE     INT     NOT NULL,
             ADDRESS CHAR(50),
