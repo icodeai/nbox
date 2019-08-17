@@ -17,7 +17,7 @@ class Postgresdb(Postgres):
         Args:
             dbParameters(str): parameters required to connect to the db
         Returns:
-            the connection parameters if the connection is successful  
+            the connection successful if the connection is successful  
 
             error if unsuccessful 
         '''
