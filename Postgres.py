@@ -21,7 +21,7 @@ class Postgresdb(Postgres):
 
             error if unsuccessful 
         '''
-        user,password,host,port,database = dbParameters.split(',')
+        user,password,host,port,database = dbParameters
         try:
             self.connection = psycopg2.connect(user,password,host,port,database)
             self.cursordb = self.connection.cursor()
