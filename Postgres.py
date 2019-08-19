@@ -3,11 +3,7 @@ import psycopg2
 from database import Postgres
 
 #env variable stored in local machine
-user = os.getenv('user')
-password = os.getenv('password')
-host = os.getenv('host')
-port = os.getenv('port')
-database = os.getenv('database')
+dbParameters = os.getenv('dbParameters')
 
 class Postgresdb(Postgres):
 
@@ -16,7 +12,7 @@ class Postgresdb(Postgres):
         self.connection = None
         self.cursordb = None
 
-    def connectdb(self):
+    def connect(self):
         '''connects to Postgresdb
         Args:
             dbParameters(str): parameters required to connect to the db
@@ -26,7 +22,7 @@ class Postgresdb(Postgres):
             error if unsuccessful 
         '''
         try:
-            self.connection = psycopg2.connect((user,password,host,port,database))
+            self.connection = psycopg2.connect(dbParameters)
             self.cursordb = self.connection.cursor()
             return 'connection successful'
 
