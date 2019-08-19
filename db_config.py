@@ -58,21 +58,15 @@ class PostgresConfig(Postgres):
         '''
         
         try:
-            query = """CREATE DATABASE {0};""".format(
-                database_name)
+            query = f"""CREATE DATABASE {database_name};"""
 
             cursor = self.cursor()
             cursor.execute(query)
-            self.connect(DATABASE_URL).commit()
-
+     
         except Exception:
 
-            return "failed to create database"
+            return f"failed to create database {database_name}"
             
-        finally:
-
-            if self.connect(DATABASE_URL):
-                self.close()  
 
     def drop_database(self,database_name):
         '''Drops a given database in a postgresql server.
@@ -85,16 +79,14 @@ class PostgresConfig(Postgres):
         '''
                 
         try:
-            query = """DROP DATABASE IF EXISTS {0};""".format(
-                database_name)
+            query = f"""DROP DATABASE IF EXISTS {database_name};"""
 
             cursor = self.cursor()
             cursor.execute(query)
-            self.connect(DATABASE_URL).commit()
-
+            
         except Exception:
 
-            return "failed to drop database"
+            return f"failed to drop database {database_name}"
 
 
 

@@ -26,13 +26,13 @@ class PostgresTestCase(TestCase):
 
         self.assertNotEqual(
             self.postgres.drop_database(self.database_name),
-                            "failed to drop database")
+            f"failed to drop database {self.database_name}")
 
     def test_create_database(self):
         
         self.assertNotEqual(
             self.postgres.create_database(self.database_name),
-                                          "failed to create database")
+            f"failed to create database {self.database_name}")
 
     def tearDown(self):
         self.postgres.drop_database(self.database_name)
