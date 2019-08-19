@@ -16,7 +16,7 @@ class Postgresdb(Postgres):
         self.connection = None
         self.cursordb = None
 
-    def connect(self):
+    def connectdb(self):
         '''connects to Postgresdb
         Args:
             dbParameters(str): parameters required to connect to the db
