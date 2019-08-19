@@ -12,7 +12,7 @@ class TestCnnctn(unittest.TestCase):
 
     def test_connection(self):
         db = Postgresdb()
-        self.assertEqual(db.connect(user,password,host,port,database),
+        self.assertEqual(db.connect((user,password,host,port,database)),
                             'connection successful')
 
 if __name__ == "__main__":

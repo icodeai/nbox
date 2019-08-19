@@ -16,7 +16,7 @@ class Postgresdb(Postgres):
         self.connection = None
         self.cursordb = None
 
-    def connect(self,user,password,host,port,database):
+    def connect(self):
         '''connects to Postgresdb
         Args:
             dbParameters(str): parameters required to connect to the db
@@ -26,7 +26,7 @@ class Postgresdb(Postgres):
             error if unsuccessful 
         '''
         try:
-            self.connection = psycopg2.connect(user,password,host,port,database)
+            self.connection = psycopg2.connect((user,password,host,port,database))
             self.cursordb = self.connection.cursor()
             return 'connection successful'
 
