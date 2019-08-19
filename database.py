@@ -8,12 +8,12 @@ class Postgres(ABC):
         pass
 
     # @abstractmethod
-    def session(self,):
+    def session(self):
         autocommit = True
         pass
 
-    # @abstractmethod
-    def create_database(self):
+    @abstractmethod
+    def create_database(self, database_name):
         pass
 
     # @abstractmethod
