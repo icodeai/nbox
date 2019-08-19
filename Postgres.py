@@ -1,4 +1,4 @@
-
+import os 
 import psycopg2
 
 class Postgresdb(Postgres):

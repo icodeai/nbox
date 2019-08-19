@@ -6,16 +6,16 @@ class Postgres(ABC):
     def connect(self,database_url):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def session(self,):
         autocommit = True
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def create_database(self):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def status(self):
         pass
 
@@ -23,26 +23,26 @@ class Postgres(ABC):
     def cursor(self):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def select_table(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def create_table(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def insert_rows(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def show_table(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def drop_table(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def close(self):
         pass
