@@ -1,7 +1,8 @@
 language: python
 python:
   - '3.7.3'
-  - "nightly"
+env:
+  -dbParameters='user=testuser password=password123 host=localhost port=5432 dbname=testdb'
 install: 
   - pip install -r requirements.txt
   - pip install coveralls
@@ -9,9 +10,9 @@ services:
   - postgresql
 
 before_script:
-  - psql -c "CREATE DATABASE test_nbox;" -U postgres
-  - psql -c "CREATE USER antoo WITH PASSWORD 'antoo123';" -U postgres
-  - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_nbox to antoo;" -U postgres
+  - psql -c "CREATE DATABASE testdb;" -U postgres
+  - psql -c "CREATE USER testuser WITH PASSWORD 'password123';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE testdb to testuser;" -U postgres
   
 script: 
   - "python -m pytest tests/"
@@ -19,5 +20,3 @@ script:
   
 after_success:
   - coveralls
-  
-cache: pip
