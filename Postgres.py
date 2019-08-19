@@ -29,6 +29,3 @@ class Postgresdb(Postgres):
         except (Exception, psycopg2.Error) as error :    
             return error
 
-if __name__ == "__main__":
-    db = Postgresdb()
-    print(db.connect(dbParameters))
