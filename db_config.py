@@ -26,6 +26,7 @@ class PostgresConfig(Postgres):
         try:
 
             connection = p.connect(database_url)
+            connection.autocommit = True
             return connection
 
         except:
@@ -46,7 +47,59 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
 
+    def create_database(self, database_name):
+        '''Creates a database on a given postgresql server.
+        
+        Args:
+            database_name (str): a name of the databse to be created.
+        
+        Returns:
+             a str if database creation failed.
+        '''
+        
+        try:
+            query = """CREATE DATABASE {0};""".format(
+                database_name)
+
+            cursor = self.cursor()
+            cursor.execute(query)
+            self.connect(DATABASE_URL).commit()
+
+        except Exception:
+
+            return "failed to create database"
+            
+        finally:
+
+            if self.connect(DATABASE_URL):
+                self.close()  
+
+    def drop_database(self,database_name):
+        '''Drops a given database in a postgresql server.
+        
+        Args:
+            database_name (str): name of databse to drop
+        
+        Returns:
+            a str if unable to drop the given database.
+        '''
+                
+        try:
+            query = """DROP DATABASE IF EXISTS {0};""".format(
+                database_name)
+
+            cursor = self.cursor()
+            cursor.execute(query)
+            self.connect(DATABASE_URL).commit()
+
+        except Exception:
+
+            return "failed to drop database"
+
+
 
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
+    print(db.create_database('db_one'))
+    print(db.drop_database('db_one'))
