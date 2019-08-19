@@ -2,7 +2,11 @@ language: python
 python:
   - '3.7.3'
 env:
-  -dbParameters='testuser','password123','localhost','5432','testdb'
+  -user='testuser'
+  -password='password123'
+  -host='localhost'
+  -port='5432'
+  -database='testdb'
 install: 
   - pip install -r requirements.txt
   - pip install coveralls
