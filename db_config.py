@@ -65,15 +65,9 @@ class PostgresConfig(Postgres):
             cursor.execute(query)
             conn.commit()
             
-
         except Exception:
 
             return 'Failed to create table'
-
-        finally:
-
-            if conn:
-                conn.close() 
 
     def drop_table(self, table_name, database_url):
         '''Drops a table if it exists in the given database.
@@ -98,10 +92,6 @@ class PostgresConfig(Postgres):
             
             return f"Unable to drop table {table_name}"
 
-        finally:
-
-            if conn:
-                conn.close()
 
 
 if __name__ == "__main__":
