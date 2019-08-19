@@ -1,6 +1,8 @@
 import os 
 import psycopg2
 
+dbParameters = os.getenv('dbParameters')
+
 class Postgresdb(Postgres):
 
     def __init__(self):
@@ -8,7 +10,7 @@ class Postgresdb(Postgres):
         self.connection = None
         self.cursordb = None
 
-    def connect(self, user, password, host, port, database):
+    def connect(self):
         '''connects to Postgresdb
         Args:
             user
@@ -20,7 +22,7 @@ class Postgresdb(Postgres):
             the connection parameters if the connection is successful
         '''
         try:
-            self.connection = psycopg2.connect(user, password, host, port,database)
+            self.connection = psycopg2.connect(dbParameters)
             self.cursordb = self.connection.cursor()
 
             return self.connection.get_dsn_parameters()
