@@ -4,6 +4,9 @@ python:
   - "3.7"
   - "nightly"
 
+before_script:
+  - psql -c "CREATE DATABASE test_nbox;" -U postgres
+  
 install:
   - "pip install pytest"
   - "pip install pytest-cov"
@@ -16,3 +19,4 @@ script:
 
 after_success:
   - coveralls
+
