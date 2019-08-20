@@ -9,7 +9,8 @@ services:
   - postgresql
 
 before_script:
-  - psql -c "DROP TABLES test_nbox;" -U postgres
+
+  - psql -c "CREATE DATABASE test_nbox;" -U postgres
   - psql -c "CREATE USER antoo WITH PASSWORD 'antoo123';" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_nbox to antoo;" -U postgres
    
