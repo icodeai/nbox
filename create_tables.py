@@ -5,7 +5,7 @@ from database import Postgres
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-def create_tables(Postgres):
+def create_tables(self,Postgres, DATABASE_URL):
     """ create tables in the nbox database"""
     tables = (
         """
