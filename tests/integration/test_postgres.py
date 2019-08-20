@@ -26,6 +26,8 @@ class PostgresTestCase(TestCase):
                             'failed to connect to database.')
     
     def test_create_table(self):
+
+        print(TEST_DATABASE_URL)
         
         self.assertNotEqual(self.postgres.create_table(
             self.query, TEST_DATABASE_URL), 'Failed to create table')
