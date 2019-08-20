@@ -10,7 +10,7 @@ WRONG_TEST_DATABASE_URL = os.getenv('WRONG_TEST_DATABASE_URL')
 
 class PostgresTestCase(TestCase):
     
-    def setUp(self):
+    def setUp(self,Postgres):
         self.postgres = create_tables()
        
     
