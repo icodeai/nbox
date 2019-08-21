@@ -84,9 +84,9 @@ class PostgresConfig(Postgres):
             cursor = self.cursor()
             cursor.execute(query)
             
-        except Exception:
+        except (Exception, p.DatabaseError) as error:
 
-            return f"failed to drop database {database_name}"
+            return f"failed to drop database {database_name}, due to {error}"
 
 
 
