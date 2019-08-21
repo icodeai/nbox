@@ -2,3 +2,22 @@
 
 # Nbox
 ML Toolkit
+
+
+
+
+
+
+
+#Docker Setup 
+
+ For Quick Setup run 
+ `
+    docker-compose up
+ `
+To run your codes 
+
+`
+    docker-compose exec backend python test.py
+`
+ 
