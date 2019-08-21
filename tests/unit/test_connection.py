@@ -9,5 +9,3 @@ class TestCnnctn(unittest.TestCase):
         self.assertEqual(db.connect(),
                             'connection successful')
 
-if __name__ == "__main__":
-    unittest.main()
