@@ -18,6 +18,7 @@ ML Toolkit
 To run your codes 
 
 `
-    docker-compose exec backend python test.py
+    docker-compose exec backend python testd.py
+    docker-compose exec backend python db_config.py
 `
  
