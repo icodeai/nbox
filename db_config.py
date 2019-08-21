@@ -28,9 +28,9 @@ class PostgresConfig(Postgres):
             connection = p.connect(database_url)
             return connection
 
-        except:
+        except (Exception, p.Error) as error:
 
-            return 'failed to connect to database. Alah!!'
+            return 'failed to connect to database. ::'+str(error)
 
     def cursor(self):
         '''Create a cursor object which allows us to execute PostgreSQL command
