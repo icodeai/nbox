@@ -1,15 +1,19 @@
 import os
 
-import psycopg2 as p
+import psycopg2
 
 from database import Postgres
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+dbParameters = os.getenv('dbParameters')
 
 class PostgresConfig(Postgres):
 
-    
-    def connect(self,database_url):
+    def __init__(self):
+        #initializes the Postgresdb class
+        self.connection = None
+        self.cursordb = None
+
+    def connect(self):
         '''Create a connection to a PostgreSQL database instance.
         
         Args:
@@ -24,29 +28,16 @@ class PostgresConfig(Postgres):
         '''
         
         try:
+            self.connection = psycopg2.connect(dbParameters)
+            self.cursordb = self.connection.cursor()
+            return 'connection successful'
 
-            connection = p.connect(database_url)
-            return connection
-
-        except:
-
-            return 'failed to connect to database.'
+        except (Exception, psycopg2.Error) as error :    
+            return error
       
-    def cursor(self):
-        '''Create a cursor object which allows us to execute PostgreSQL command
-           through Python source code.
-           Cursors created from the same connection are not isolated, i.e., any changes
-           done to the database by a cursor are immediately visible by the other cursors.
-        
-        Returns:
-            Object:cursor object.
-        '''
-
-        connection = self.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        return cursor
-
-
-if __name__ == "__main__":
-    db = PostgresConfig()
-    print(db.connect(DATABASE_URL))
+    def status(self):
+        try:
+         return self.connection.status
+        except (Exception, psycopg2.Error) as error :    
+            return error
+         
