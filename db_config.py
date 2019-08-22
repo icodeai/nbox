@@ -56,10 +56,18 @@ class PostgresConfig(Postgres):
         cursor.execute(query)
         connection.commit()
         connection.close()
-        return 'table created'    
+        return 'table created'
+    
+    def select_table(self,query):
+        pass
         
 
 if __name__ == "__main__":
     db = PostgresConfig()
+    query = '''CREATE TABLE TEST2 (ID INT PRIMARY KEY NOT NULL,
+            NAME    TEXT    NOT NULL,
+            AGE     INT     NOT NULL,
+            ADDRESS CHAR(50),
+            SALARY  REAL);'''
     print(db.connect(DATABASE_URL))
-    #print(db.create_table(query))
+    print(db.create_table(query))
