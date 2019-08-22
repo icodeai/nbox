@@ -16,7 +16,7 @@ class Postgres(ABC):
     def create_database(self):
         pass
 
-   @abstractmethod
+    @abstractmethod
     def status(self):
         pass
 
