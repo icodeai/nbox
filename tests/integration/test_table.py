@@ -12,5 +12,4 @@ class PostgresTestCase(TestCase):
                    '''
         db = PostgresConfig()
         db.connect()
-        self.assertEqual(db.create_table(query),
-                            'table created')
+        self.assertEqual(db.create_table(query),'table created')
