@@ -35,9 +35,18 @@ class PostgresConfig(Postgres):
         except (Exception, psycopg2.Error) as error :    
             return error
       
-    def status(self):
+    def create_database(self,query):
+        '''creates a database 
+        Args:
+            query(str):sql query to be executed
+        Returns:
+             db created if successful
+             an error if unsuccessful
+        '''
         try:
-         return self.connection.status
+         self.cursordb.execute(query)
+         self.connection.commit()
+         return 'database created'
         except (Exception, psycopg2.Error) as error :    
             return error
          
