@@ -52,6 +52,14 @@ class PostgresConfig(Postgres):
             return 'Can not exucute PostgreSQL command'
 
     def create_database(self, db_name):
+        """Creates a Postgres database.
+        
+        Arguments:
+            db_name(str): A name of the given database.
+        
+        Returns:
+            None if no exception or error mssg incase there is one. 
+        """
     
         try: 
 
