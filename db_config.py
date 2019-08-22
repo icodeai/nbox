@@ -35,10 +35,9 @@ class PostgresConfig(Postgres):
         except (Exception, psycopg2.Error) as error :    
             return error
       
-    def session(self):
+    def status(self):
         try:
-         self.connection.set_session(autocommit = True)
-         return 'autocommit enabled'
+         return self.connection.status
         except (Exception, psycopg2.Error) as error :    
             return error
          

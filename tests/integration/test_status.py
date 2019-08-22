@@ -7,5 +7,5 @@ class PostgresTestCase(TestCase):
          
     def test_session(self):
         db = PostgresConfig()
-        self.assertNotEqual(db.session(),
-                            'autocommit enabled')
+        self.assertNotEqual(db.status(),
+                            'STATUS_READY')
