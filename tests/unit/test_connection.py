@@ -1,11 +1,11 @@
 import os
 import unittest
-from Postgres import Postgresdb
+from db_config import PostgresConfig
 
 class TestCnnctn(unittest.TestCase):
 
     def test_connection(self):
-        db = Postgresdb()
+        db = PostgresConfig()
         self.assertEqual(db.connect(),
                             'connection successful')
 

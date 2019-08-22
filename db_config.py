@@ -5,7 +5,7 @@ from database import Postgres
 #env variable stored in local machine
 dbParameters = os.getenv('dbParameters')
 
-class Postgresdb(Postgres):
+class PostgresConfig(Postgres):
 
     def __init__(self):
         #initializes the Postgresdb class
