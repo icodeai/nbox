@@ -35,8 +35,8 @@ class PostgresConfig(Postgres):
         except (Exception, psycopg2.Error) as error :    
             return error
       
-    def create_database(self,query):
-        '''creates a database 
+    def create_table(self,query):
+        '''creates a table
         Args:
             query(str):sql query to be executed
         Returns:
@@ -46,7 +46,7 @@ class PostgresConfig(Postgres):
         try:
          self.cursordb.execute(query)
          self.connection.commit()
-         return 'database created'
+         return 'table created'
         except (Exception, psycopg2.Error) as error :    
             return error
          
