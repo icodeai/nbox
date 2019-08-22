@@ -1,52 +1,31 @@
-import os
-
-import psycopg2 as p
-
+import os 
+import psycopg2
 from database import Postgres
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+#env variable stored in local machine
+dbParameters = os.getenv('dbParameters')
 
 class PostgresConfig(Postgres):
 
-    
-    def connect(self,database_url):
-        '''Create a connection to a PostgreSQL database instance.
-        
+    def __init__(self):
+        #initializes the Postgresdb class
+        self.connection = None
+        self.cursordb = None
+
+    def connect(self):
+        '''connects to Postgresdb
         Args:
-            database_url (str): A url with a given user database credentials.
-        
+            dbParameters(str): parameters required to connect to the db
         Returns:
-            object: A PostgreSQL Connection Object. 
-                    This connection is thread-safe and can be shared among many threads.
-            
-            str: It is returned incase there is a database error or exception that may 
-                 occur while working with PostgreSQL from Python. 
+            the connection successful if the connection is successful  
+
+            error if unsuccessful 
         '''
-        
         try:
+            self.connection = psycopg2.connect(dbParameters)
+            self.cursordb = self.connection.cursor()
+            return 'connection successful'
 
-            connection = p.connect(database_url)
-            return connection
+        except (Exception, psycopg2.Error) as error :    
+            return error
 
-        except:
-
-            return 'failed to connect to database.'
-      
-    def cursor(self):
-        '''Create a cursor object which allows us to execute PostgreSQL command
-           through Python source code.
-           Cursors created from the same connection are not isolated, i.e., any changes
-           done to the database by a cursor are immediately visible by the other cursors.
-        
-        Returns:
-            Object:cursor object.
-        '''
-
-        connection = self.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        return cursor
-
-
-if __name__ == "__main__":
-    db = PostgresConfig()
-    print(db.connect(DATABASE_URL))
