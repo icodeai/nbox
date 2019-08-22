@@ -26,6 +26,7 @@ class PostgresConfig(Postgres):
         try:
 
             connection = p.connect(database_url)
+            connection.autocommit = True
             return connection
 
         except:
@@ -41,12 +42,31 @@ class PostgresConfig(Postgres):
         Returns:
             Object:cursor object.
         '''
+        try: 
 
-        connection = self.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        return cursor
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            return cursor
 
+        except:
+            return 'Can not exucute PostgreSQL command'
+
+    def create_database(self, db_name):
+    
+        try: 
+
+            query = f"""CREATE DATABASE {db_name};"""
+    
+            conn = self.connect(DATABASE_URL)
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+           
+        except  :
+            return "Error while connecting to PostgreSQL"
 
 if __name__ == "__main__":
     db = PostgresConfig()
+    
     print(db.connect(DATABASE_URL))
+    print(db.create_database('db_name'))
