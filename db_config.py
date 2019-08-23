@@ -47,6 +47,23 @@ class PostgresConfig(Postgres):
         return cursor
 
 
+
+    def Create_table(self, DATABASE_URL):
+        connection = self.p.connect(DATABASE_URL)
+        return 'Opened database successfully'
+
+        cursor = connection.cursor()()
+        cursor.execute('''CREATE TABLE COMPANY
+            (ID INT PRIMARY KEY     NOT NULL,
+            NAME           TEXT    NOT NULL,
+            AGE            INT     NOT NULL,
+            ADDRESS        CHAR(50),
+            SALARY         REAL);''')
+        return 'Table created successfully'
+
+        connection.commit()
+        connection.close()
+
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
