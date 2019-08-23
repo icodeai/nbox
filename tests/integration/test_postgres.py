@@ -18,3 +18,14 @@ class PostgresTestCase(TestCase):
         print(TEST_DATABASE_URL)
         self.assertNotEqual(self.postgres.connect(TEST_DATABASE_URL),
                             'failed to connect to database.')
+    def test_select_table(self):
+        """
+        test function to select table
+        
+        Arguments:
+            self {[type]} -- [description]
+        """
+        print(TEST_DATABASE_URL)
+        self.assertNotEqual(self.postgres.select_table(TEST_DATABASE_URL), 
+                            'connected')
+        
