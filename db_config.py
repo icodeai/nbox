@@ -42,7 +42,7 @@ class PostgresConfig(Postgres):
             Object:cursor object.
         '''
 
-        connection = self.connect(DATABASE_URL)
+        connection = p.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
     
@@ -51,6 +51,8 @@ class PostgresConfig(Postgres):
         Fetch and disaplay records from a database
         """
         try:
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
             cursor.execute('''CREATE TABLE COMPANY
                 (ID INT PRIMARY KEY     NOT NULL,
                 NAME           TEXT    NOT NULL,
