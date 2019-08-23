@@ -45,25 +45,21 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
-
-
-
-    def Create_table(self, DATABASE_URL):
-        connection = self.p.connect(DATABASE_URL)
-        return 'Opened database successfully'
-
-        cursor = connection.cursor()()
-        cursor.execute('''CREATE TABLE COMPANY
-            (ID INT PRIMARY KEY     NOT NULL,
-            NAME           TEXT    NOT NULL,
-            AGE            INT     NOT NULL,
-            ADDRESS        CHAR(50),
-            SALARY         REAL);''')
-        return 'Table created successfully'
-
-        connection.commit()
-        connection.close()
-
+    
+    def select_table(self, query):
+        """"
+        Fetch and disaplay records from a database
+        """
+        try:
+            connection = p.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            cursor.execute(query)
+            rows=cursor.fetchall()
+            connection.close
+        except:
+            return 'failed to connect'
+            
 if __name__ == "__main__":
     db = PostgresConfig()
-    print(db.connect(DATABASE_URL))
+    print(db.connect(
+        DATABASE_URL))
