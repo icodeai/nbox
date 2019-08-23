@@ -20,11 +20,11 @@ class Postgres(ABC):
     def status(self):
         pass
 
-    @abstractmethod
+    #@abstractmethod
     def cursor(self):
         pass
 
-    @abstractmethod
+    #@abstractmethod
     def select_table(self,query):
         pass
 
