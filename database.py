@@ -32,6 +32,7 @@ class Postgres(ABC):
     def create_table(self,query):
         pass
 
+    
     @abstractmethod
     def insert_rows(self,query):
         pass
