@@ -61,9 +61,6 @@ class PostgresConfig(Postgres):
             SALARY         REAL);''')
         return 'Table created successfully'
 
-        connection.commit()
-        connection.close()
-
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
