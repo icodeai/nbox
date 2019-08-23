@@ -45,6 +45,20 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
+    def insert_rows(self, query):
+        """
+        Insert rows into a table in an existing database
+        
+        Arguments:
+            query {SQL statement} -- [description]
+        """
+        try:
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            cursor.execute(query)
+            connection.commiit()
+        except:
+            return 'failed to connect'
 
 
 if __name__ == "__main__":
