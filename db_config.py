@@ -51,8 +51,7 @@ class PostgresConfig(Postgres):
         Fetch and disaplay records from a database
         """
         try:
-            connection = self.connect(DATABASE_URL)
-            cursor = connection.cursor()
+            cursor = self.connection.cursor()
             cursor.execute('''CREATE TABLE COMPANY
                 (ID INT PRIMARY KEY     NOT NULL,
                 NAME           TEXT    NOT NULL,
@@ -63,7 +62,3 @@ class PostgresConfig(Postgres):
         except:
             return 'failed to create tables'
             
-if __name__ == "__main__":
-    db = PostgresConfig()
-    print(db.connect(
-        DATABASE_URL))
