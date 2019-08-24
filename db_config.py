@@ -41,11 +41,24 @@ class PostgresConfig(Postgres):
         Returns:
             Object:cursor object.
         '''
-
+    def show_table(self, query):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
-
+    
+        '''
+            This method shows the table selected given a certain query.
+            Parameters:
+            -----------
+            query: str
+                The query that selects the table
+            Returns:
+                rows
+        '''
+        self.cursor .execute(query)
+        rows= self.cursor .fetchall()
+        return rows
+    
 
 if __name__ == "__main__":
     db = PostgresConfig()
