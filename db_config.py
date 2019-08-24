@@ -46,18 +46,12 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
     
-    def select_table(self, query):
+    def create_table(self, query):
         """"
-        Fetch and disaplay records from a database
+        Create tables in the database
         """
         try:   
-            self.cursor.execute('''CREATE TABLE COMPANY
-                (ID INT PRIMARY KEY     NOT NULL,
-                NAME           TEXT    NOT NULL,
-                AGE            INT     NOT NULL,
-                ADDRESS        CHAR(50),
-                SALARY         REAL);''')
-
+            self.cursor.execute(query)
             self.connection.commit()
             return 'Table created successfully'
         except:
