@@ -50,15 +50,20 @@ class PostgresConfig(Postgres):
         """"
         Fetch and disaplay records from a database
         """
-        try:
-            cursor = self.connection.cursor()
-            cursor.execute('''CREATE TABLE COMPANY
+        try:   
+            self.cursor.execute('''CREATE TABLE COMPANY
                 (ID INT PRIMARY KEY     NOT NULL,
                 NAME           TEXT    NOT NULL,
                 AGE            INT     NOT NULL,
                 ADDRESS        CHAR(50),
                 SALARY         REAL);''')
+
+            self.connection.commit()
             return 'Table created successfully'
         except:
             return 'failed to create tables'
             
+if __name__ == "__main__":
+    db = PostgresConfig()
+    print(db.connect(
+        DATABASE_URL))
