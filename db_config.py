@@ -46,16 +46,20 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
     
-    def create_table(self, query):
-        """"
-        Create tables in the database
+    def drop_table(self, query):
+        """
+            This method drops a table from the database.
+            Parameters:
+            -----------
+            query: str
+                The query that drops a table from the database
         """
         try:   
             self.cursor.execute(query)
             self.connection.commit()
-            return 'Table created successfully'
+            return 'Table droped successfully'
         except:
-            return 'failed to create tables'
+            return 'failed to drop tables'
             
 if __name__ == "__main__":
     db = PostgresConfig()
