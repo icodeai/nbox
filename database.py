@@ -40,7 +40,7 @@ class Postgres(ABC):
     def show_table(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def drop_table(self,query):
         pass
 
