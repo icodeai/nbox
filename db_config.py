@@ -49,4 +49,20 @@ class PostgresConfig(Postgres):
          return 'table created'
         except (Exception, psycopg2.Error) as error :    
             return error
+
+    def insert_rows(self,query):
+        '''inserts an sql row
+        Args:
+            query(str):sql query to be executed
+        Returns:
+             row created if successful
+             an error if unsuccessful
+        '''
+        try:
+            self.cursordb.execute(query)
+            self.connection.commit()
+            return 'row created'
+        except (Exception, psycopg2.Error) as error :    
+            return error
+        
          
