@@ -7,8 +7,8 @@ class PostgresTestCase(TestCase):
          
     def test_table(self):
         query ='''CREATE TABLE TESTTABLE
-                  (ID INT PRIMARY KEY  NOT NULL,
-                   VALUE1          TEXT NOT NULL,)
+                  (testvalue int,
+                   anothervalue int)
                    '''
         db = PostgresConfig()
         db.connect()
