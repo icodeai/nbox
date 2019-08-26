@@ -6,7 +6,7 @@ from db_config import PostgresConfig
 class PostgresTestCase(TestCase):
          
     def test_table(self):
-        query ='''CREATE TABLE TESTTABLE IF NOT EXISTS
+        query ='''CREATE TABLE IF NOT EXISTS TESTTABLE 
                   (testvalue int,
                    anothervalue int)
                    '''
