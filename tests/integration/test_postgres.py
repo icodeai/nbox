@@ -1,4 +1,4 @@
-import unittest
+
 import os
 from unittest import TestCase
 
@@ -21,8 +21,9 @@ class PostgresTestCase(TestCase):
                             'failed to connect to database.')
 
     def test_create_table(self):
-        print('tb_name')
+        print('test_tb_name')
         self.assertNotEqual(self.postgres.create_table('tb_name'),"Table created successfully.")
 
 if __name__ == '__main__':
-    unittest.main()
+    unit = PostgresTestCase()
+    
