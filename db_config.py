@@ -45,6 +45,15 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
+    
+    def drop_table(self, query):
+        try:
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            cursor.execute(query)
+            connection.commit()
+        except:
+            return 'failed'
 
 
 if __name__ == "__main__":

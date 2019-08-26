@@ -15,6 +15,14 @@ class PostgresTestCase(TestCase):
        
     
     def test_make_good_connection(self):
-        print(TEST_DATABASE_URL)
         self.assertNotEqual(self.postgres.connect(TEST_DATABASE_URL),
-                            'failed to connect to database.')
+                            'connected')
+    def test_drop_table(self):
+        """
+        tests for drop table method
+        
+        Arguments:
+            query {[SQL statement]} -- [description]
+        """
+        self.assertNotEqual(self.postgres.drop_table(TEST_DATABASE_URL),
+                                                  'connected')
