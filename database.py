@@ -44,6 +44,6 @@ class Postgres(ABC):
     def drop_table(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def close(self):
         pass
