@@ -51,12 +51,14 @@ class PostgresConfig(Postgres):
         Function to create a table in the database
         
         """
-        connection = self.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        cursor.execute(query)
-        connection.commit()
-        connection.close()
-        return 'table created'
+        try:
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            cursor.execute(query)
+            connection.commit()
+            connection.close()
+        except:
+            return 'failed'
     
     def select_table(self,query):
         pass
