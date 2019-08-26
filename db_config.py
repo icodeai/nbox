@@ -24,8 +24,10 @@ class PostgresConfig(Postgres):
         '''
         
         try:
-
+           
             connection = p.connect(database_url)
+            connection.autocommit = True
+            
             return connection
 
         except:
@@ -41,12 +43,43 @@ class PostgresConfig(Postgres):
         Returns:
             Object:cursor object.
         '''
+        try:
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            return cursor
+        except:
+            return 'Can not execute PostgreSQL commands'
 
-        connection = self.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        return cursor
+    def create_table(self,tb_name):
+        """
+        Creates a table in the database.
 
+        Arguments:
+        ----------
+            tb_name(str): The name of the table.
+
+        Returns:
+        --------
+            Returns Table created successful or Error while creating a table incase the table is not created.
+        """
+        try:
+            query = f"""CREATE TABLE TABLE2
+                (ID serial PRIMARY KEY     NOT NULL,
+                username VARCHAR (50) UNIQUE NOT NULL,
+                password VARCHAR (50) NOT NULL
+                );"""
+    
+            conn = self.connect(DATABASE_URL)
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+            return "Table created successfully."
+        except:
+            #Exception as e
+            return "Error while creating a table."
+             # return e
 
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
+    print(db.create_table('tb_name'))
