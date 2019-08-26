@@ -45,8 +45,21 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
-
-
+    
+    def select_table(self, query):
+        """"
+        Fetch and disaplay records from a database
+        """
+        try:
+            connection = p.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            cursor.execute(query)
+            rows=cursor.fetchall()
+            connection.close
+        except:
+            return 'failed to connect'
+            
 if __name__ == "__main__":
     db = PostgresConfig()
-    print(db.connect(DATABASE_URL))
+    print(db.connect(
+        DATABASE_URL))

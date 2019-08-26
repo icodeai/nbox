@@ -24,7 +24,7 @@ class Postgres(ABC):
     def cursor(self):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def select_table(self,query):
         pass
 
