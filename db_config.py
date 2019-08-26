@@ -45,8 +45,21 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
-
+    
+    def create_database(self, db_name):
+        """
+        create a postgresql database
+        """
+        try:
+            query = f"""CREATE DATABASE {db_name};"""
+            connection = p.connect(DATABASE_URL)
+            connection.autocommit = True
+            cursor = connection.cursor()
+            cursor.execute(query)
+        except:
+            return 'failed to create database'
 
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
+    print(db.create_database('db_name'))
