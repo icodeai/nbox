@@ -45,6 +45,14 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
+    
+    def show_table(self, query):
+        try:
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            table = cursor.fetchall()
+        except:
+            return 'connection failed'
 
 
 if __name__ == "__main__":
