@@ -45,6 +45,17 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
+    
+    def close(self):
+        """
+        Close database connection
+        """
+        try:
+            connection = p.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            connection.close()
+        except:
+            return 'failed to close connection'
 
 
 if __name__ == "__main__":
