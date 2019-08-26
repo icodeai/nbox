@@ -1,15 +1,19 @@
 import os
 
-import psycopg2 as p
+import psycopg2
 
 from database import Postgres
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+dbParameters = os.getenv('dbParameters')
 
 class PostgresConfig(Postgres):
 
-    
-    def connect(self,database_url):
+    def __init__(self):
+        #initializes the Postgresdb class
+        self.connection = None
+        self.cursordb = None
+
+    def connect(self):
         '''Create a connection to a PostgreSQL database instance.
         
         Args:
@@ -24,29 +28,41 @@ class PostgresConfig(Postgres):
         '''
         
         try:
+            self.connection = psycopg2.connect(dbParameters)
+            self.cursordb = self.connection.cursor()
+            return 'connection successful'
 
-            connection = p.connect(database_url)
-            return connection
-
-        except:
-
-            return 'failed to connect to database.'
+        except (Exception, psycopg2.Error) as error :    
+            return error
       
-    def cursor(self):
-        '''Create a cursor object which allows us to execute PostgreSQL command
-           through Python source code.
-           Cursors created from the same connection are not isolated, i.e., any changes
-           done to the database by a cursor are immediately visible by the other cursors.
-        
+    def create_table(self,query):
+        '''creates a table
+        Args:
+            query(str):sql query to be executed
         Returns:
-            Object:cursor object.
+             db created if successful
+             an error if unsuccessful
         '''
+        try:
+         self.cursordb.execute(query)
+         self.connection.commit()
+         return 'table created'
+        except (Exception, psycopg2.Error) as error :    
+            return error
 
-        connection = self.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        return cursor
-
-
-if __name__ == "__main__":
-    db = PostgresConfig()
-    print(db.connect(DATABASE_URL))
+    def insert_rows(self,query):
+        '''inserts an sql row
+        Args:
+            query(str):sql query to be executed
+        Returns:
+             row created if successful
+             an error if unsuccessful
+        '''
+        try:
+            self.cursordb.execute(query)
+            self.connection.commit()
+            return 'row created'
+        except (Exception, psycopg2.Error) as error :    
+            return error
+        
+         
