@@ -12,7 +12,7 @@ class Postgres(ABC):
         autocommit = True
         pass
 
-    # @abstractmethod
+    #@abstractmethod
     def create_database(self):
         pass
 
@@ -44,6 +44,6 @@ class Postgres(ABC):
     def drop_table(self,query):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def close(self):
         pass
