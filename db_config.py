@@ -56,8 +56,8 @@ class PostgresConfig(Postgres):
                 rows
         '''
         self.cursor .execute(query)
-        rows= self.cursor .fetchall()
-        return rows
+        tables = self.cursor .fetchall()
+        return tables
     
 
 if __name__ == "__main__":
