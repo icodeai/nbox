@@ -4,12 +4,12 @@ import psycopg2 as p
 
 from database import Postgres
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.environ.get('Database_URL')
 
 class PostgresConfig(Postgres):
 
     
-    def connect(self,database_url):
+    def connect(self, DATABASE_URL):
         '''Create a connection to a PostgreSQL database instance.
         
         Args:
@@ -25,14 +25,13 @@ class PostgresConfig(Postgres):
         
         try:
 
-            connection = p.connect(database_url)
+            connection = p.connect(DATABASE_URL)
             return connection
 
-        except:
-
-            return 'failed to connect to database.'
+        except (Exception, p.Error) as error:
+            return ("Error while connecting to PostgreSQL", error)
       
-    def cursor(self):
+    def cursor(self, DATABASE_URL):
         '''Create a cursor object which allows us to execute PostgreSQL command
            through Python source code.
            Cursors created from the same connection are not isolated, i.e., any changes
@@ -46,7 +45,37 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
 
+    def create_table(self, query):
+        '''Creates a table in a given database.
+
+        Args:
+            query : an sql query to be executed.
+            database_url : it contains database connection credentials.
+
+        Returns:
+            creates a table or it returns an error message in the event of a failure.
+        '''
+
+        try:
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            cursor.execute(query)
+            connection.commit()
+            connection.close()
+
+
+        except (Exception, p.DatabaseError) as error:
+            print('Failed to create table', error)
+
 
 if __name__ == "__main__":
     db = PostgresConfig()
-    print(db.connect(DATABASE_URL))
+    query = '''CREATE TABLE alpha (
+	id INT,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	app_name VARCHAR(50) NOT NULL,
+	email VARCHAR(35),
+	gender VARCHAR(10) NOT NULL);'''
+    db.connect(DATABASE_URL)
+    db.create_table(query)
