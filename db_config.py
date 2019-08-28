@@ -26,6 +26,7 @@ class PostgresConfig(Postgres):
         try:
 
             connection = p.connect(database_url)
+            connection.autocommit = True
             return connection
 
         except:
@@ -45,6 +46,48 @@ class PostgresConfig(Postgres):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
+
+    def create_database(self, database_name):
+        '''Creates a database on a given postgresql server.
+        
+        Args:
+            database_name (str): a name of the databse to be created.
+        
+        Returns:
+             a str if database creation failed.
+        '''
+        
+        try:
+            query = f"""CREATE DATABASE {database_name};"""
+
+            cursor = self.cursor()
+            cursor.execute(query)
+     
+        except (Exception, p.DatabaseError) as error:
+
+            return f"failed to create database {database_name}, due to {error}"
+            
+
+    def drop_database(self,database_name):
+        '''Drops a given database in a postgresql server.
+        
+        Args:
+            database_name (str): name of databse to drop
+        
+        Returns:
+            a str if unable to drop the given database.
+        '''
+                
+        try:
+            query = f"""DROP DATABASE IF EXISTS {database_name};"""
+
+            cursor = self.cursor()
+            cursor.execute(query)
+            
+        except (Exception, p.DatabaseError) as error:
+
+            return f"failed to drop database {database_name}, due to {error}"
+
 
 
     def close(self,connection):
@@ -109,6 +152,8 @@ class PostgresConfig(Postgres):
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
+    print(db.create_database('db_one'))
+    print(db.drop_database('db_one'))
     print(db.close())
     create_table_query = """CREATE TABLE IF NOT EXISTS test_table (
     table_id serial PRIMARY KEY NOT NULL,
@@ -119,3 +164,4 @@ if __name__ == "__main__":
     print(db.create_table(create_table_query, DATABASE_URL))
     table_name = 'test_table'
     print(db.drop_table(table_name, DATABASE_URL))
+
