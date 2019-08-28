@@ -147,11 +147,7 @@ class PostgresConfig(Postgres):
             return f"Unable to drop table {table_name}"
 
 
-    def show_table(self, query):
-        connection = self.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        return cursor
-    
+    def show_table(self, query):    
         '''
             This method shows the table selected given a certain query.
             Parameters:
@@ -163,11 +159,11 @@ class PostgresConfig(Postgres):
         '''
 
         try:
-            self.cursor .execute(query)
-            tables = self.cursor .fetchall()
-
+            connection = self.connect(DATABASE_URL)
+            cursor = connection.cursor()
+            table = cursor.fetchall()
         except:
-            return tables
+            return 'connection failed'
 
 
 
