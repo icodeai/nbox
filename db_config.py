@@ -47,20 +47,37 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
 
-    
     def select_table(self, query):
         """"
         Fetch and disaplay records from a database
         """
+
+        connection = p.connect(DATABASE_URL)
+        cursor = connection.cursor()
+        cursor.execute(query)
+        rows=cursor.fetchall()
+        connection.close
+        return 'success'
+
+    def create_database(self, database_name):
+        '''Creates a database on a given postgresql server.
+        
+        Args:
+            database_name (str): a name of the databse to be created.
+        
+        Returns:
+             a str if database creation failed.
+        '''
+        
         try:
-            connection = p.connect(DATABASE_URL)
-            cursor = connection.cursor()
+            query = f"""CREATE DATABASE {database_name};"""
+
+            cursor = self.cursor()
             cursor.execute(query)
-            rows=cursor.fetchall()
-            connection.close
-        except:
-            return 'failed to connect'
-            
+     
+        except (Exception, p.DatabaseError) as error:
+
+            return f"failed to create database {database_name}, due to {error}"
             
 
     def drop_database(self,database_name):
