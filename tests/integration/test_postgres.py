@@ -69,7 +69,7 @@ class PostgresTestCase(TestCase):
         self.postgres.drop_table(self.table_name, TEST_DATABASE_URL)
         self.postgres.drop_database(self.database_name)
 
-    def test_show_table(self):
-        self.postgres.show_table(self.table_name, TEST_DATABASE_URL)
-        self.assertNotEqual(self.postgres.show_table(
+    def test_show_table(self, query):
+        self.postgres.create_table(self.table_name, TEST_DATABASE_URL)
+        self.assertEqual(self.postgres.show_table(
             self.table_name, TEST_DATABASE_URL),"Unable to show tables")
