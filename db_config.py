@@ -147,7 +147,7 @@ class PostgresConfig(Postgres):
             return f"Unable to drop table {table_name}"
 
 
-    def show_table(self, table_name, query):
+    def show_table(self, query):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
@@ -161,9 +161,13 @@ class PostgresConfig(Postgres):
         Returns:
                 tables
         '''
-        self.cursor .execute(query)
-        tables = self.cursor .fetchall()
-        return tables
+
+        try:
+            self.cursor .execute(query)
+            tables = self.cursor .fetchall()
+
+        except:
+            return tables
 
 
 
