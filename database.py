@@ -29,7 +29,7 @@ class Postgres(ABC):
         pass
 
     @abstractmethod
-    def create_table(self, query, database_url)
+    def create_table(self, query, database_url):
         pass
 
     # @abstractmethod
