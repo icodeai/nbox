@@ -59,7 +59,7 @@ class PostgresConfig(Postgres):
         except:
             return 'failed to connect'
             
-if __name__ == "__main__":
+if __name__ == "__main__": 
     db = PostgresConfig()
     print(db.connect(
         DATABASE_URL))
