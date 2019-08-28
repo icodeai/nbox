@@ -28,8 +28,8 @@ class Postgres(ABC):
     def select_table(self,query):
         pass
 
-    # @abstractmethod
-    def create_table(self,query):
+    @abstractmethod
+    def create_table(self, query, database_url):
         pass
 
     # @abstractmethod
@@ -40,10 +40,10 @@ class Postgres(ABC):
     def show_table(self,query):
         pass
 
-    # @abstractmethod
-    def drop_table(self,query):
+    @abstractmethod
+    def drop_table(self, table_name, database_url):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def close(self):
         pass
