@@ -147,7 +147,7 @@ class PostgresConfig(Postgres):
             return f"Unable to drop table {table_name}"
 
 
-    def show_table(self, query):
+    def show_table(self, table_name, query):
         connection = self.connect(DATABASE_URL)
         cursor = connection.cursor()
         return cursor
@@ -161,9 +161,17 @@ class PostgresConfig(Postgres):
         Returns:
                 tables
         '''
-        self.cursor .execute(query)
-        tables = self.cursor .fetchall()
-        return tables
+        try:
+
+            query = f"""SHOW TABLE IF EXISTS {table_name} CASCADE"""
+            self.cursor .execute(query)
+            tables = self.cursor .fetchall()
+
+        except Exception:
+
+            return f"Unable to show table {table_name}"
+
+
 
 
 
