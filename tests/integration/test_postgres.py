@@ -37,16 +37,10 @@ class PostgresTestCase(TestCase):
                             'failed to connect to database.')
 
 
-    def test_show_table(self,query):
-        self.postgres.create_table(self.query, TEST_DATABASE_URL)
-        self.assertNotEqual(self.postgres.show_table(
-        self.query, TEST_DATABASE_URL), "Unable to show table")
+    def test_show_table(self):
+            self.assertNotEqual(self.postgres.show_table(TEST_DATABASE_URL),
+                                'connected')
 
-    def test_fail_show_table(self):
-        self.assertEqual(self.postgres.show_table(
-        self.query, WRONG_TEST_DATABASE_URL), "Unable to show table")
-
-    
     def test_create_table(self): 
         self.assertNotEqual(self.postgres.create_table(
             self.query, TEST_DATABASE_URL), 'Failed to create table')
