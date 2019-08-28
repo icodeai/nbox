@@ -8,12 +8,12 @@ class Postgres(ABC):
         pass
 
     # @abstractmethod
-    def session(self,):
+    def session(self):
         autocommit = True
         pass
 
-    # @abstractmethod
-    def create_database(self):
+    @abstractmethod
+    def create_database(self, database_name):
         pass
 
     # @abstractmethod
@@ -28,8 +28,8 @@ class Postgres(ABC):
     def select_table(self,query):
         pass
 
-    # @abstractmethod
-    def create_table(self,query):
+    @abstractmethod
+    def create_table(self, query, database_url):
         pass
 
     # @abstractmethod
@@ -40,10 +40,10 @@ class Postgres(ABC):
     def show_table(self,query):
         pass
 
-    # @abstractmethod
-    def drop_table(self,query):
+    @abstractmethod
+    def drop_table(self, table_name, database_url):
         pass
 
-    # @abstractmethod
+    @abstractmethod
     def close(self):
         pass
