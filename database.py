@@ -24,7 +24,7 @@ class Postgres(ABC):
     def cursor(self):
         pass
 
-    @abstractmethod
+    # @abstractmethod
     def select_table(self,query):
         pass
 
@@ -32,7 +32,7 @@ class Postgres(ABC):
     def create_table(self, query, database_url):
         pass
 
-    @abstractmethod
+    # @abstractmethod
     def insert_rows(self,query):
         pass
 
