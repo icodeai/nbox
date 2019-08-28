@@ -40,11 +40,11 @@ class PostgresTestCase(TestCase):
     def test_show_table(self,query):
         self.postgres.create_table(self.query, TEST_DATABASE_URL)
         self.assertNotEqual(self.postgres.show_table(
-        self.table_name, TEST_DATABASE_URL), f"Unable to show table {self.table_name}")
+        self.query, TEST_DATABASE_URL), "Unable to show table")
 
     def test_fail_show_table(self):
         self.assertEqual(self.postgres.show_table(
-        self.table_name, WRONG_TEST_DATABASE_URL), f"Unable to show table {self.table_name}")
+        self.query, WRONG_TEST_DATABASE_URL), "Unable to show table")
 
     
     def test_create_table(self): 

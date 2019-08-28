@@ -161,17 +161,9 @@ class PostgresConfig(Postgres):
         Returns:
                 tables
         '''
-        try:
-
-            query = f"""SHOW TABLE IF EXISTS {table_name} CASCADE"""
-            self.cursor .execute(query)
-            tables = self.cursor .fetchall()
-
-        except Exception:
-
-            return f"Unable to show table {table_name}"
-
-
+        self.cursor .execute(query)
+        tables = self.cursor .fetchall()
+        return tables
 
 
 
