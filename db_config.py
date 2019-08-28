@@ -46,7 +46,66 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
 
+    def create_table(self,query,database_url):
+        '''Creates a table in a given database.
+        
+        Args:
+            query (Docstring): an sql query to be executed.
+            database_url (str): it contains database connection credentials.
+        
+        Returns:
+            creates a table or it returns a message incase method fails to
+             create database.
+        '''
+        
+        try:
+
+            conn = self.connect(database_url)
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+            
+        except Exception:
+
+            return 'Failed to create table'
+
+    def drop_table(self, table_name, database_url):
+        '''Drops a table if it exists in the given database.
+        
+        Args:
+            table_name (str): name of the table to be dropped.
+            database_url (str): a string containing connection database credentials.
+        
+        Returns:
+            Drops a given table or returns a string indicating unable to drop the table.
+        '''
+
+        try:
+        
+            query = f"""DROP TABLE IF EXISTS {table_name} CASCADE"""
+            conn = self.connect(database_url)
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+
+        except Exception:
+            
+            return f"Unable to drop table {table_name}"
+
+
 
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
+
+    create_table_query = """CREATE TABLE IF NOT EXISTS test_table (
+    table_id serial PRIMARY KEY NOT NULL,
+    table_number int NOT NULL,
+    table_info character varying(1000),
+    date_created timestamp with time zone DEFAULT ('now'::text)::date NOT NULL
+    )"""
+
+    print(db.create_table(create_table_query, DATABASE_URL))
+
+    table_name = 'test_table'
+    print(db.drop_table(table_name, DATABASE_URL))
