@@ -20,5 +20,5 @@ class PostgresTestCase(TestCase):
                             'failed to connect to database.')
 
     def test_show_table(self):
-        self.assertNotEqual(self.postgres.show_table(TEST_DATABASE_URL),
+        self.assertEqual(self.postgres.show_table(TEST_DATABASE_URL),
                             'connected')
