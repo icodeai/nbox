@@ -148,14 +148,13 @@ class PostgresConfig(Postgres):
 
 
     def show_table(self, query):    
-        '''
-            This method shows the table selected given a certain query.
-            Parameters:
-            -----------
-        query: str
-                The query that selects the table
+        '''Show tables created in the given database.
+        
+        Args:
+            query (Docstring): an sql query to be executed.
+        
         Returns:
-                tables
+            Show the given tables or returns a string indicating unable to show the tables.
         '''
 
         try:
