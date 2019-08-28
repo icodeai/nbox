@@ -46,6 +46,17 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
 
+
+    def close(self,connection):
+        try:
+           
+            connection.close()
+
+            return "Close connection successful"
+
+        except:
+            return "Close connection failed"
+
     def create_table(self,query,database_url):
         '''Creates a table in a given database.
         
@@ -94,18 +105,17 @@ class PostgresConfig(Postgres):
 
 
 
+
 if __name__ == "__main__":
     db = PostgresConfig()
     print(db.connect(DATABASE_URL))
-
+    print(db.close())
     create_table_query = """CREATE TABLE IF NOT EXISTS test_table (
     table_id serial PRIMARY KEY NOT NULL,
     table_number int NOT NULL,
     table_info character varying(1000),
     date_created timestamp with time zone DEFAULT ('now'::text)::date NOT NULL
     )"""
-
     print(db.create_table(create_table_query, DATABASE_URL))
-
     table_name = 'test_table'
     print(db.drop_table(table_name, DATABASE_URL))
