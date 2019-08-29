@@ -10,8 +10,8 @@ services:
 
 before_script:
   - psql -c "CREATE DATABASE test_nbox;" -U postgres
-  - psql -c "CREATE USER antoo WITH PASSWORD 'antoo123';" -U postgres
-  - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_nbox to antoo;" -U postgres
+  - psql -c "CREATE USER tim WITH PASSWORD 'tim123';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_nbox to tim;" -U postgres
   
 script: 
   - "python -m pytest tests/"
