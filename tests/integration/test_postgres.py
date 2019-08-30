@@ -28,7 +28,7 @@ class PostgresTestCase(TestCase):
         self.assertNotEqual(self.postgres.connect(TEST_DATABASE_URL),
                             'failed to connect to database.')
 
-    def test_create_table(self, table_url):
+    def test_create_table(self, database_url):
         self.assertNotEqual(self.postgres.create_table('tb_name'),
                             "Table created successfully.")
 
@@ -49,7 +49,7 @@ class PostgresTestCase(TestCase):
         self.assertEqual(self.postgres.drop_table(
             self.table_name, WRONG_TEST_DATABASE_URL), f"Unable to drop table {self.table_name}")    
  
-    def test_create_database(self, database_url):
+    def test_create_database(self):
         self.assertNotEqual(
             self.postgres.create_database(self.database_name),
             f"failed to create database {self.database_name}")    
