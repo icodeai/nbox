@@ -49,7 +49,7 @@ class PostgresTestCase(TestCase):
         self.assertEqual(self.postgres.drop_table(
             self.table_name, WRONG_TEST_DATABASE_URL), f"Unable to drop table {self.table_name}")    
  
-    def test_create_database(self):
+    def test_create_database(self, database_url):
         self.assertNotEqual(
             self.postgres.create_database(self.database_name),
             f"failed to create database {self.database_name}")    
