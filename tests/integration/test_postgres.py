@@ -63,12 +63,13 @@ class PostgresTestCase(TestCase):
         self.assertNotEqual(
             self.postgres.drop_database(self.database_name),
             f"failed to drop database {self.database_name}")
+    
+    def test_show_table(self):
+        self.assertNotEqual(self.postgres.show_table(TEST_DATABASE_URL),
+                            'Failed to show tables')
            
 
     def tearDown(self):
         self.postgres.drop_table(self.table_name, TEST_DATABASE_URL)
         self.postgres.drop_database(self.database_name)
 
-    def test_show_table(self):
-        self.assertNotEqual(self.postgres.show_table(TEST_DATABASE_URL),
-                            'Failed to show tables')
