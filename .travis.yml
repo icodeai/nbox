@@ -2,15 +2,17 @@ language: python
 python:
   - '3.7.3'
   - "nightly"
+  
 install: 
   - pip install -r requirements.txt
   - pip install coveralls
+  
 services:
   - postgresql
 
 before_script:
   - psql -c "CREATE DATABASE test_nbox;" -U postgres
- 
+  
 script: 
   - "python -m pytest tests/"
   - "python -m pytest --cov tests/"
