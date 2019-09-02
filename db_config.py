@@ -171,6 +171,17 @@ class PostgresConfig(Postgres):
             return 'connection failed'
 
     def insert_rows(self,table_name, data, table_number, url = DATABASE_URL):
+
+        '''Show tables created in the given database.
+        
+            Args:
+                table_name: a name of a table that exists in the database.
+                query (Docstring): an sql query to be executed.
+                database_url (str): a string containing connection database credentials.
+            
+            Returns:
+                Show the given tables or returns a string indicating unable to show the tables.
+        '''
         
         query = f"""INSERT INTO {table_name} ({data}) VALUES ({table_number});"""
 
