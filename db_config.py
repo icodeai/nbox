@@ -170,6 +170,9 @@ class PostgresConfig(Postgres):
         except:
             return 'connection failed'
 
+    def insert_rows(self,query):
+        pass
+
 
 
 
