@@ -67,6 +67,10 @@ class PostgresTestCase(TestCase):
     def test_show_table(self):
         self.assertNotEqual(self.postgres.show_table(TEST_DATABASE_URL),
                             'Failed to show tables')
+
+    def test_insert_rows(self): 
+        self.assertNotEqual(self.postgres.insert_rows(
+            self.query, self.table_name, TEST_DATABASE_URL), f"Unable to insert rows")
            
 
     def tearDown(self):

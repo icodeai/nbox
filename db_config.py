@@ -170,7 +170,7 @@ class PostgresConfig(Postgres):
         except:
             return 'connection failed'
 
-    def insert_rows(self,table_name, data, table_number, url = DATABASE_URL):
+    def insert_rows(self, table_name, data, table_number, url = DATABASE_URL):
 
         '''Show tables created in the given database.
         

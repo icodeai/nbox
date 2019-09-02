@@ -33,7 +33,7 @@ class Postgres(ABC):
         pass
 
     @abstractmethod
-    def insert_rows(self,query):
+    def insert_rows(self,query, table_name):
         pass
 
     @abstractmethod
