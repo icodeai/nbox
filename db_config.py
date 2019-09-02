@@ -176,6 +176,7 @@ class PostgresConfig(Postgres):
         
             Args:
                 table_name: a name of a table that exists in the database.
+                data: the data to be inserted in the table.
                 query (Docstring): an sql query to be executed.
                 database_url (str): a string containing connection database credentials.
             
