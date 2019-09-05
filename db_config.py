@@ -6,39 +6,39 @@ from database import Postgres
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
+
 class PostgresConfig(Postgres):
 
-    
-    def connect(self,database_url):
+    def connect(self, database_url):
         '''Create a connection to a PostgreSQL database instance.
-        
+
         Args:
             database_url (str): A url with a given user database credentials.
-        
+
         Returns:
             object: A PostgreSQL Connection Object. 
                     This connection is thread-safe and can be shared among many threads.
-            
+
             str: It is returned incase there is a database error or exception that may 
                  occur while working with PostgreSQL from Python. 
         '''
-        
+
         try:
 
             connection = p.connect(database_url)
             connection.autocommit = True
             return connection
 
-        except:
+        except (Exception, p.Error) as error:
 
-            return 'failed to connect to database.'
-      
+            return 'failed to connect to database. ::'+str(error)
+
     def cursor(self):
         '''Create a cursor object which allows us to execute PostgreSQL command
            through Python source code.
            Cursors created from the same connection are not isolated, i.e., any changes
            done to the database by a cursor are immediately visible by the other cursors.
-        
+
         Returns:
             Object:cursor object.
         '''
