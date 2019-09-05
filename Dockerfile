@@ -3,6 +3,7 @@ RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
 WORKDIR /code
 COPY testd.py testd.py
 COPY db_config.py  db_config.py
+COPY .env .env
 COPY database.py database.py
 COPY tests/   /tests/
 RUN  ls -la  /*
