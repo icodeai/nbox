@@ -46,6 +46,16 @@ class PostgresConfig(Postgres):
         cursor = connection.cursor()
         return cursor
 
+    def status(self):
+        '''
+        Args:
+            Returns the current Status of the Object 
+
+        Returns:
+            String: 
+        '''
+        return self.status()
+
 
 if __name__ == "__main__":
     db = PostgresConfig()
