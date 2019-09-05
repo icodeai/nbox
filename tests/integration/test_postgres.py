@@ -19,3 +19,4 @@ class PostgresTestCase(TestCase):
                             'failed to connect to database.')
 
     def test_status(self:
+        self.

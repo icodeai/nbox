@@ -11,6 +11,13 @@ services:
 
 
   backend:
+    enviroment:
+      -dbname=test_nbox 
+      -host=localhost
+      -port=5432
+      -user=postgres
+      -password=toor
+      -wronguser=guantanamera
     build: .
     volumes:
        - .:/code

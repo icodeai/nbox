@@ -16,11 +16,11 @@ class PostgresConfig(Postgres):
             database_url (str): A url with a given user database credentials.
 
         Returns:
-            object: A PostgreSQL Connection Object. 
+            object: A PostgreSQL Connection Object.
                     This connection is thread-safe and can be shared among many threads.
 
-            str: It is returned incase there is a database error or exception that may 
-                 occur while working with PostgreSQL from Python. 
+            str: It is returned incase there is a database error or exception that may
+                 occur while working with PostgreSQL from Python.
         '''
 
         try:
@@ -49,12 +49,26 @@ class PostgresConfig(Postgres):
     def status(self):
         '''
         Args:
-            Returns the current Status of the Object 
+            Returns the current Status of the Object
 
         Returns:
-            String: 
+            String:
         '''
         return self.status()
+
+
+     def cursor(self):
+         '''
+            Returns a cursor object 
+         '''
+
+    def select_table(self):
+        '''
+            
+            Returns content of a Table 
+        '''
+
+    def 
 
 
 if __name__ == "__main__":
