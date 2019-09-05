@@ -9,7 +9,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 class PostgresConfig(Postgres):
 
     
-    def connect(self, database_url):
+    def connect(self,database_url):
         '''Create a connection to a PostgreSQL database instance.
         
         Args:
@@ -100,7 +100,7 @@ class PostgresConfig(Postgres):
         except:
             return "Close connection failed"
 
-    def create_table(self,query, database_url):
+    def create_table(self,query,database_url):
         '''Creates a table in a given database.
         
         Args:
@@ -170,34 +170,6 @@ class PostgresConfig(Postgres):
         except:
             return 'connection failed'
 
-    def insert_rows(self, table_name, rows, table_number, url = DATABASE_URL):
-
-        '''Show tables created in the given database.
-        
-            Args:
-                table_name: a name of a table that exists in the database.
-                data: the data to be inserted in the table.
-                query (Docstring): an sql query to be executed.
-                database_url (str): a string containing connection database credentials.
-            
-            Returns:
-                Show the given tables or returns a string indicating unable to show the tables.
-        '''
-
-        query = f"""INSERT INTO {table_name} ({rows}) VALUES ({table_number});"""
-
-        try:
-            connection = self.connect(url)
-            cursor = connection.cursor()
-            cursor.execute(query)
-            connection.commit()
-
-        except Exception:
-            return f"Unable to insert rows {table_name}"
-
-
-    
-
 
 
 
@@ -216,5 +188,4 @@ if __name__ == "__main__":
     # print(db.create_table(create_table_query, DATABASE_URL))
     # table_name = 'test_table'
     # print(db.drop_table(table_name, DATABASE_URL))
-    #print (db.show_table())
-    print (db.insert_rows("Teachers", "table_number", 100 )) 
+    print (db.show_table())
