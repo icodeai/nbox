@@ -180,23 +180,46 @@ class PostgresConfig(Postgres):
             return f"Unable to drop table {table_name}"
 
 
+    def show_table(self, url=DATABASE_URL):    
+        '''Show tables created in the given database.
+        
+        Args:
+            query (Docstring): an sql query to be executed.
+            database_url (str): a string containing connection database credentials.
+        
+        Returns:
+            Show the given tables or returns a string indicating unable to show the tables.
+        '''
+        query = ("""SELECT table_name FROM information_schema.tables
+                 WHERE table_schema = 'public'""")
+        try:
+            connection = self.connect(url)
+            cursor = connection.cursor()
+            cursor.execute( query)
+            tables = cursor.fetchall()
+
+            for table in tables:
+                print (table)
+        except:
+            return 'connection failed'
+
+
 
 
 if __name__ == "__main__":
     db = PostgresConfig()
-    print(db.connect(DATABASE_URL))
-    print(db.create_table('tb_name'))
-    print(db.create_database('db_one'))
-    print(db.drop_database('db_one'))
-    print(db.close())
-    create_table_query = """CREATE TABLE IF NOT EXISTS test_table (
-    table_id serial PRIMARY KEY NOT NULL,
-    table_number int NOT NULL,
-    table_info character varying(1000),
-    date_created timestamp with time zone DEFAULT ('now'::text)::date NOT NULL
-    )"""
-    print(db.create_table(create_table_query, DATABASE_URL))
-    table_name = 'test_table'
-    print(db.drop_table(table_name, DATABASE_URL))
-
+    # print(db.connect(DATABASE_URL))
+    # print(db.create_database('db_one'))
+    # print(db.drop_database('db_one'))
+    # print(db.close())
+    # create_table_query = """CREATE TABLE IF NOT EXISTS test_table (
+    # table_id serial PRIMARY KEY NOT NULL,
+    # table_number int NOT NULL,
+    # table_info character varying(1000),
+    # date_created timestamp with time zone DEFAULT ('now'::text)::date NOT NULL
+    # )"""
+    # print(db.create_table(create_table_query, DATABASE_URL))
+    # table_name = 'test_table'
+    # print(db.drop_table(table_name, DATABASE_URL))
+    print (db.show_table())
 
