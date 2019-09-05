@@ -9,7 +9,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 class PostgresConfig(Postgres):
 
     
-    def connect(self,database_url):
+    def connect(self,url=database_url):
         '''Create a connection to a PostgreSQL database instance.
         
         Args:
@@ -25,7 +25,7 @@ class PostgresConfig(Postgres):
         
         try:
 
-            connection = p.connect(database_url)
+            connection = p.connect(url)
             connection.autocommit = True
             return connection
 
