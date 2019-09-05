@@ -9,7 +9,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 class PostgresConfig(Postgres):
 
     
-    def connect(self,url=database_url):
+    def connect(self, database_url):
         '''Create a connection to a PostgreSQL database instance.
         
         Args:
@@ -25,7 +25,7 @@ class PostgresConfig(Postgres):
         
         try:
 
-            connection = p.connect(url)
+            connection = p.connect(database_url)
             connection.autocommit = True
             return connection
 
@@ -100,7 +100,7 @@ class PostgresConfig(Postgres):
         except:
             return "Close connection failed"
 
-    def create_table(self,query,database_url):
+    def create_table(self,query, database_url):
         '''Creates a table in a given database.
         
         Args:
