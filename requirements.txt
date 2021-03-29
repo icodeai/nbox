@@ -18,7 +18,7 @@ psycopg2==2.8.3
 pudb==2019.1
 py==1.8.0
 pycodestyle==2.5.0
-Pygments==2.4.2
+Pygments==2.7.4
 pylint==2.3.1
 pyparsing==2.4.2
 pytest==5.0.1
